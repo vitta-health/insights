@@ -26,7 +26,7 @@ const GraphQLSchema = require('./graphql');
  *
  * Default path: .env (You can remove the path argument entirely, after renaming `.env.example` to `.env`)
  */
-dotenv.load({path: '.env'});
+dotenv.load({ path: '.env' });
 
 const UploadProfilePicture = require('./middleware/uploadProfilePicture');
 
@@ -70,7 +70,7 @@ app.use('/graphql', jwt({
 
 // =========== GraphQL setting  ========== //
 app.use('/graphql', async (req, res, done) => {
-    var userId = (req.auth && req.auth.id ) ? req.auth.id : undefined;
+    const userId = (req.auth && req.auth.id ) ? req.auth.id : undefined;
     const user = ( userId ) ? await User.findById(userId): undefined;
     req.context = {
         user: user,
