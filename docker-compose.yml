@@ -2,17 +2,17 @@ version: '2'
 services:
     app:
         container_name: "app-insights"
-        image: node:8
+        image: node:8.10.0-alpine
         volumes:
-            - .:/usr/app/
+            - .:/usr/app
+        working_dir: /usr/app
         ports:
-            - 3000:3000
+            - 3001:3001
         links:
             - mongodb
         depends_on:
             - mongodb
         command: "npm run dev"
-
     mongodb:
         image: mongo:latest
         container_name: "db-insights"

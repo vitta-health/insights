@@ -8,6 +8,7 @@ const {
 // import the user query file we created
 const UserQuery = require('./queries/User');
 const InitQuery = require('./queries/Init');
+const HttpConnectorsQuery = require('./queries/HttpConnectors');
 
 // import the user mutation file we created
 const UserMutation = require('./mutations/User');
