@@ -1,9 +1,9 @@
-const HttpConnector = require('../../models/HttpConnector');
-
-class HttpConnectorController {
+class BaseController {
 
     constructor() {
-        this.model = HttpConnector;
+        if (this.constructor === Repository) {
+           throw new Error('This is an abstract class.');
+        }
     }
 
     // this will update existing record in database
@@ -16,16 +16,19 @@ class HttpConnectorController {
 
         }      
     }
-
+    
     async create(filters) {
         try {
-            const record = await this.model.find(filters).exec();
-
+            const record = await this.getModel().find(filters).exec();
             return record.toJSON();
         } catch (e) {
 
         }      
     }
+
+    getModel() {
+        throw new Error('You should implement this method in child class');
+    }
 };
 
-module.exports = new HttpConnectorController();
+module.exports = new BaseController();
