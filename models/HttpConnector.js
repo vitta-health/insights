@@ -3,9 +3,9 @@ const _ = require('lodash');
 const mongoosePaginate = require('mongoose-paginate');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+mongoose.Promise = Promise;
 
 const httpConnectorSchema = new mongoose.Schema({
-    _id: { type: ObjectId },
     host: { type: String },
     authType: { type: String },
     auth: { type: String },

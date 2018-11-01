@@ -1,10 +1,11 @@
-var bcrypt = require('bcrypt-nodejs');
-var crypto = require('crypto');
-var mongoose = require('mongoose');
-var _ = require('lodash');
-var mongoosePaginate = require('mongoose-paginate');
+const bcrypt = require('bcrypt-nodejs');
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const mongoosePaginate = require('mongoose-paginate');
 
-var addressSchema = new mongoose.Schema({
+mongoose.Promise = Promise;
+const addressSchema = new mongoose.Schema({
     street: [{type: String}],
     city: String,
     countryId: String,
@@ -14,7 +15,7 @@ var addressSchema = new mongoose.Schema({
     postcode: String
 }, {timestamps: true});
 
-var userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email: {type: String, default: ''},
     isEmailVerified: Boolean,
 
@@ -44,7 +45,7 @@ var userSchema = new mongoose.Schema({
  * Password hash middleware.
  */
 userSchema.pre('save', function (next) {
-    var user = this;
+    const user = this;
     if (!user.isModified('password')) {
         return next();
     }
@@ -64,7 +65,7 @@ userSchema.pre('save', function (next) {
 
 userSchema.plugin(mongoosePaginate);
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 
 module.exports = User;
